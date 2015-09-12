@@ -1,0 +1,1044 @@
+{
+    "project": {
+        "name": "Rosie",
+        "description": "Rosie: The shopping list that builds itself.",
+        "version": "0.0.1"
+    },
+    "files": {
+        "client/app/household/householdController.js": {
+            "name": "client/app/household/householdController.js",
+            "modules": {
+                "Household Controller": 1
+            },
+            "classes": {
+                "getUser()": 1,
+                "getHousehold()": 1,
+                "submitEmail()": 1,
+                "checkInputs()": 1,
+                "editEmail()": 1,
+                "sendHousehold()": 1,
+                "inviteUsers()": 1,
+                "redirect()": 1,
+                "submitHousehold()": 1,
+                "newInvite()": 1,
+                "joinHouse()": 1,
+                "updateHouse()": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/routers/buyRouter.js": {
+            "name": "server/routers/buyRouter.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/routers/householdRouter.js": {
+            "name": "server/routers/householdRouter.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/routers/listRouter.js": {
+            "name": "server/routers/listRouter.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/routers/pantryRouter.js": {
+            "name": "server/routers/pantryRouter.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/routers/userRouter.js": {
+            "name": "server/routers/userRouter.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/PantryItem.js": {
+            "name": "server/PantryItem.js",
+            "modules": {
+                "nn-helpers": 1
+            },
+            "classes": {
+                "PantryItem": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/list-helpers.js": {
+            "name": "server/list-helpers.js",
+            "modules": {
+                "groceryHelpers": 1
+            },
+            "classes": {
+                "listHelpers": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/pantry-helpers.js": {
+            "name": "server/pantry-helpers.js",
+            "modules": {},
+            "classes": {
+                "pantryHelpers": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/user-helpers.js": {
+            "name": "server/user-helpers.js",
+            "modules": {},
+            "classes": {
+                "userHelpers": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Household Controller": {
+            "name": "Household Controller",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "getUser()": 1,
+                "getHousehold()": 1,
+                "submitEmail()": 1,
+                "checkInputs()": 1,
+                "editEmail()": 1,
+                "sendHousehold()": 1,
+                "inviteUsers()": 1,
+                "redirect()": 1,
+                "submitHousehold()": 1,
+                "newInvite()": 1,
+                "joinHouse()": 1,
+                "updateHouse()": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "client/app/household/householdController.js",
+            "line": 258,
+            "description": "Household Controller: Controlls household.html and createHousehold.html"
+        },
+        "nn-helpers": {
+            "name": "nn-helpers",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "PantryItem": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "server/PantryItem.js",
+            "line": 12,
+            "description": "This module sets up individual items in the general pantry\nIt creates a neural network for each item and sets default values for\nthe trainingSet and average time to expiration for each item.\nIt also creates methods for creating and updating user-specific pantry items."
+        },
+        "groceryHelpers": {
+            "name": "groceryHelpers",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "listHelpers": 1,
+                "pantryHelpers": 1,
+                "userHelpers": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "server/user-helpers.js",
+            "line": 1,
+            "description": "Provides methods for creating household pantries and lists",
+            "requires": [
+                "Household",
+                "appPantry",
+                "PantryItem",
+                "pantryHelpers",
+                "Q"
+            ]
+        }
+    },
+    "classes": {
+        "getUser()": {
+            "name": "getUser()",
+            "shortname": "getUser()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 38,
+            "description": "function to request user info from server (private)"
+        },
+        "getHousehold()": {
+            "name": "getHousehold()",
+            "shortname": "getHousehold()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 57,
+            "description": "function to request household info from server (private)"
+        },
+        "submitEmail()": {
+            "name": "submitEmail()",
+            "shortname": "submitEmail()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 82,
+            "description": "function to store email in local variable until submission occurs (attached to $scope.s)"
+        },
+        "checkInputs()": {
+            "name": "checkInputs()",
+            "shortname": "checkInputs()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 97,
+            "description": "function to check that user inputs are valid"
+        },
+        "editEmail()": {
+            "name": "editEmail()",
+            "shortname": "editEmail()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 126,
+            "description": "function to edit email in list of unsent invitations"
+        },
+        "sendHousehold()": {
+            "name": "sendHousehold()",
+            "shortname": "sendHousehold()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 146,
+            "description": "function to send household information to server"
+        },
+        "inviteUsers()": {
+            "name": "inviteUsers()",
+            "shortname": "inviteUsers()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 167,
+            "description": "function to send invite requests to server for a list of emails",
+            "params": [
+                {
+                    "name": "emails:",
+                    "description": "array of \"emails\"",
+                    "type": "Array"
+                },
+                {
+                    "name": "cb:",
+                    "description": "callback to be executed when invites are successfuly sent",
+                    "type": "Function"
+                }
+            ]
+        },
+        "redirect()": {
+            "name": "redirect()",
+            "shortname": "redirect()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 200,
+            "description": "function to redirect to household page when inviteUsersFinished and sendHouseholdFinished"
+        },
+        "submitHousehold()": {
+            "name": "submitHousehold()",
+            "shortname": "submitHousehold()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 214,
+            "description": "function submit household to server"
+        },
+        "newInvite()": {
+            "name": "newInvite()",
+            "shortname": "newInvite()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 228,
+            "description": "function to submit a single invite to the server",
+            "params": [
+                {
+                    "name": "email:",
+                    "description": "email to be invited",
+                    "type": "String"
+                }
+            ]
+        },
+        "joinHouse()": {
+            "name": "joinHouse()",
+            "shortname": "joinHouse()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 243,
+            "description": "function join household (attached to $scope.s)",
+            "params": [
+                {
+                    "name": "hhid:",
+                    "description": "is the householdId to be joined",
+                    "type": "String"
+                }
+            ]
+        },
+        "updateHouse()": {
+            "name": "updateHouse()",
+            "shortname": "updateHouse()",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Household Controller",
+            "namespace": "",
+            "file": "client/app/household/householdController.js",
+            "line": 258,
+            "description": "function send request to server to join household (private)",
+            "params": [
+                {
+                    "name": "hhid:",
+                    "description": "is the householdId to be joined",
+                    "type": "String"
+                },
+                {
+                    "name": "email:",
+                    "description": "is the current users email",
+                    "type": "String"
+                },
+                {
+                    "name": "accept:",
+                    "description": "true to accept invitation, false to reject",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "cb:",
+                    "description": "callback to be executed on success",
+                    "type": "Function"
+                }
+            ]
+        },
+        "PantryItem": {
+            "name": "PantryItem",
+            "shortname": "PantryItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "nn-helpers",
+            "namespace": "",
+            "file": "server/PantryItem.js",
+            "line": 12,
+            "description": "Creates an item that will be stored in the general pantry",
+            "contstructor": "",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                }
+            ]
+        },
+        "listHelpers": {
+            "name": "listHelpers",
+            "shortname": "listHelpers",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "groceryHelpers",
+            "namespace": "",
+            "file": "server/list-helpers.js",
+            "line": 13,
+            "description": "Provides methods for manipulating household shopping lists",
+            "static": 1
+        },
+        "pantryHelpers": {
+            "name": "pantryHelpers",
+            "shortname": "pantryHelpers",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "groceryHelpers",
+            "namespace": "",
+            "file": "server/pantry-helpers.js",
+            "line": 14,
+            "description": "Provides methods for manipulating household shopping lists",
+            "static": 1
+        },
+        "userHelpers": {
+            "name": "userHelpers",
+            "shortname": "userHelpers",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "groceryHelpers",
+            "namespace": "",
+            "file": "server/user-helpers.js",
+            "line": 1,
+            "description": "Provides methods for creating and updating Users",
+            "static": 1
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "server/routers/buyRouter.js",
+            "line": 6,
+            "description": "POST /buy\nPurchase list of items from shopping cart",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/householdRouter.js",
+            "line": 6,
+            "description": "GET /household\nReturns the household information",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/householdRouter.js",
+            "line": 21,
+            "description": "PUT /household\nUpdate information for household\nFor now, only updating Name property",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/householdRouter.js",
+            "line": 38,
+            "description": "DELETE /household",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/listRouter.js",
+            "line": 6,
+            "description": "GET /list/:id\nReturns the list generated for the requesting household",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/listRouter.js",
+            "line": 22,
+            "description": "POST /list\nManually add item to list",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/listRouter.js",
+            "line": 39,
+            "description": "DELETE /list\nManually remove item from list",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/pantryRouter.js",
+            "line": 6,
+            "description": "GET /pantry/household/:id\nReturns the pantry for the household\nIncludes two lists: tracked and untracked",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/pantryRouter.js",
+            "line": 24,
+            "description": "GET /pantry/general\nReturns the general pantry (all items)",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/pantryRouter.js",
+            "line": 48,
+            "description": "POST /pantry\nAdd item to pantry from pantry builder\nNote: For items bought, use /buy",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/pantryRouter.js",
+            "line": 67,
+            "description": "DELETE /pantry\nRemove item from pantry\nNote: This will not add the item to shopping list",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/userRouter.js",
+            "line": 6,
+            "description": "GET /user/:id\n \nRetrieves information about user, including received outstanding/pending invites",
+            "return": {
+                "description": "JSON\n        ,\n            {...}\n          ]\n        }",
+                "type": "!~YUIDOC_LINE~!          userId:\"abc\", !~YUIDOC_LINE~!          email:\"test@example.com\", !~YUIDOC_LINE~!          householdId:\"def\", !~YUIDOC_LINE~!          invites: [ !~YUIDOC_LINE~!            {!~YUIDOC_LINE~!              householdName: 'Example Name',!~YUIDOC_LINE~!              householdId: '123abc'!~YUIDOC_LINE~!"
+            },
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/userRouter.js",
+            "line": 36,
+            "description": "POST /user\n\nIf User exists, return householdId\nIf User doesn't exist, create new User and new Household\n  and return householdId\n\nReceives { \"userId\": \"123abc\", \"email\": \"example@site.com\"}",
+            "return": {
+                "description": "String householdId"
+            },
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/userRouter.js",
+            "line": 58,
+            "description": "POST /user/invite\n\nCreates an invitation for the user\n \nInvites a user, by email, to a household specified by ID in the request\n\nE.g. John (householdId = abc123) invites Kate at kate@gmail.com\nReceives { \"household\": \"abc123\", \"inviteeEmail\": \"kate@gmail.com\"}",
+            "return": {
+                "description": "200 if successful, 404 if unsuccessful"
+            },
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/userRouter.js",
+            "line": 82,
+            "description": "PUT /user/invite\n\nUpdates user invitation\n\nEither accepts or rejects pending invitation\n\nE.g. Kate accepts John's invitation\nReceives { household: \"abc123\", inviteeEmail: \"kate@gmail.com\", accept: true }",
+            "return": {
+                "description": "Kate's new householdId if successful, 404 if unsuccessful"
+            },
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/routers/userRouter.js",
+            "line": 108,
+            "description": "DELETE /user",
+            "class": "PantryItem",
+            "module": "Household Controller"
+        },
+        {
+            "file": "server/PantryItem.js",
+            "line": 28,
+            "description": "Trains an instance of a pantry item with the given trainingSet\nand exports a standalone (trained) neural network as a\nmethod for that item with no library dependencies.",
+            "itemtype": "method",
+            "name": "train",
+            "params": [
+                {
+                    "name": "trainingSet",
+                    "description": "\nAn array of objects with input and output data for the\nneural network. Ex: [{input: [1], output: [0.9]}]\nSee [Synaptic documentation](https://github.com/cazala/synaptic/wiki/Trainer)",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "see [Synaptic documentation](https://github.com/cazala/synaptic/wiki/Networks#standalone)",
+                "type": "Function"
+            },
+            "class": "PantryItem",
+            "module": "nn-helpers"
+        },
+        {
+            "file": "server/list-helpers.js",
+            "line": 20,
+            "description": "Calculate the amount of time that has passed since the item was purchased",
+            "itemtype": "method",
+            "name": "timeSincePurchase",
+            "params": [
+                {
+                    "name": "date",
+                    "description": "\nthe date the item was last purchased",
+                    "type": "Date"
+                }
+            ],
+            "return": {
+                "description": "the time in days since the item was last purchased",
+                "type": "Number"
+            },
+            "class": "listHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/list-helpers.js",
+            "line": 33,
+            "description": "Generates a shopping list for a household based upon the length of time since\nthe item was last purchased, and Rosie's calculated probability that the \nhousehold has run out of that item.",
+            "itemtype": "method",
+            "name": "autoBuildList",
+            "params": [
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "class": "listHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/list-helpers.js",
+            "line": 87,
+            "description": "Adds an item to a household's shopping list.\nIf the item is not already in their pantry, it adds it to the pantry as well.\nIf the item is already in their pantry, it updates Rosie's neural network\nto train it to add the item to the list sooner.",
+            "itemtype": "method",
+            "name": "addToList",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "class": "listHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/list-helpers.js",
+            "line": 157,
+            "description": "Removes an item from a household's shopping list is the user\ndoesn't want it there, but hasn't purchased it.\nIt also updates Rosie's neural network to train it to \nadd the item to the list later.",
+            "itemtype": "method",
+            "name": "removeFromList",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "class": "listHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/list-helpers.js",
+            "line": 224,
+            "description": "Removes an item from a household's shopping list, updating\nthe last purchased date for that item in the pantry and setting\nit's `fullyStocked` property to `true`.",
+            "itemtype": "method",
+            "name": "buy",
+            "params": [
+                {
+                    "name": "items",
+                    "description": "\nan array of the names of the items",
+                    "type": "Array"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "class": "listHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 21,
+            "description": "Updates a household item's neural network with additional\ntraining data provided when a user adds or removes an\nitem from their shopping list.",
+            "itemtype": "method",
+            "name": "updateItemNetwork",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item to update",
+                    "type": "String"
+                },
+                {
+                    "name": "itemProps",
+                    "description": "\nthe current properties of the item in the household's pantry",
+                    "type": "Object"
+                },
+                {
+                    "name": "household",
+                    "description": "\nthe household object returned from the database",
+                    "type": "Object"
+                },
+                {
+                    "name": "fullyStocked",
+                    "description": "\nif true, the item is fully stocked, if false, it is not",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 48,
+            "description": "Adds an item to a household's pantry when they either purchase the item, \nor add it from the app's general pantry list.",
+            "itemtype": "method",
+            "name": "addToPantry",
+            "static": 1,
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                },
+                {
+                    "name": "month",
+                    "description": "\nallows manual input of the month the item was last purchased",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "now"
+                },
+                {
+                    "name": "day",
+                    "description": "\nallows manual input of the day the item was last purchased",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "now"
+                }
+            ],
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 124,
+            "description": "Completely removes an item from a households's pantry",
+            "itemtype": "method",
+            "name": "removeFromPantry",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 159,
+            "description": "Updates an item's default expiration time",
+            "itemtype": "method",
+            "name": "updateExpTime",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "\nthe name of the item",
+                    "type": "String"
+                },
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                },
+                {
+                    "name": "time",
+                    "description": "\nthe length of time (in days) from purchase to expiration",
+                    "type": "Number"
+                }
+            ],
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 185,
+            "description": "Return a specific household's pantry",
+            "itemtype": "method",
+            "name": "getPantry",
+            "params": [
+                {
+                    "name": "householdId",
+                    "description": "\nthe string that identifies a household in the database",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the household's pantry, including the properties of each item",
+                "type": "Object"
+            },
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/pantry-helpers.js",
+            "line": 220,
+            "description": "Return the general pantry",
+            "itemtype": "method",
+            "name": "getPantry",
+            "return": {
+                "description": "the general pantry, including the properties of each item",
+                "type": "Object"
+            },
+            "class": "pantryHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/user-helpers.js",
+            "line": 14,
+            "description": "Retrieves and returns User information.",
+            "itemtype": "method",
+            "name": "getUser",
+            "params": [
+                {
+                    "name": "userId",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback is supplied with User object.",
+                "type": "Promise"
+            },
+            "class": "userHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/user-helpers.js",
+            "line": 32,
+            "description": "Retrieves and returns the householdId for a user.\n\nIf the user does not exist, it will create a new user with the\nsupplied userId and email. In this way, there is no separation\nbetween signing in and signing up from the client's perspective.",
+            "itemtype": "method",
+            "name": "getHouseholdForUser",
+            "params": [
+                {
+                    "name": "userId",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback is supplied with user's householdId.",
+                "type": "Promise"
+            },
+            "class": "userHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/user-helpers.js",
+            "line": 65,
+            "description": "Creates a new User and a new Household for that user.\nThe user is added to the households `users` property.",
+            "itemtype": "method",
+            "name": "createUser",
+            "params": [
+                {
+                    "name": "userId",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback is supplied with new User object.",
+                "type": "Promise"
+            },
+            "class": "userHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/user-helpers.js",
+            "line": 100,
+            "description": "Adds the inviters Household information into the invitee's `invites` property,\nand adds invitee's email to the households sent invites list.\nIf invitation already exists, do nothing and return successfully.",
+            "itemtype": "method",
+            "name": "createInvitation",
+            "params": [
+                {
+                    "name": "householdId",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "inviteeEmail",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback is supplied with invitee's User object.",
+                "type": "Promise"
+            },
+            "class": "userHelpers",
+            "module": "groceryHelpers"
+        },
+        {
+            "file": "server/user-helpers.js",
+            "line": 134,
+            "description": "Accepts or rejects the invitation.\n\nAccepting will change the invitee's HouseholdId to\nthe creator's householdId, and add the invitee's email\nto the creator household's users list.\n\nBoth accept and reject will remove the household's invite from\nthe User's `invites` array, and from the household's `sentInvites` array",
+            "itemtype": "method",
+            "name": "updateInvitation",
+            "params": [
+                {
+                    "name": "householdId",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "inviteeEmail",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "accept",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Callback is supplied with invitee's User object",
+                "type": "Promise"
+            },
+            "class": "userHelpers",
+            "module": "groceryHelpers"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: contstructor",
+            "line": " server/PantryItem.js:12"
+        },
+        {
+            "message": "Missing item type\nPOST /buy\nPurchase list of items from shopping cart",
+            "line": " server/routers/buyRouter.js:6"
+        },
+        {
+            "message": "Missing item type\nGET /household\nReturns the household information",
+            "line": " server/routers/householdRouter.js:6"
+        },
+        {
+            "message": "Missing item type\nPUT /household\nUpdate information for household\nFor now, only updating Name property",
+            "line": " server/routers/householdRouter.js:21"
+        },
+        {
+            "message": "Missing item type\nDELETE /household",
+            "line": " server/routers/householdRouter.js:38"
+        },
+        {
+            "message": "Missing item type\nGET /list/:id\nReturns the list generated for the requesting household",
+            "line": " server/routers/listRouter.js:6"
+        },
+        {
+            "message": "Missing item type\nPOST /list\nManually add item to list",
+            "line": " server/routers/listRouter.js:22"
+        },
+        {
+            "message": "Missing item type\nDELETE /list\nManually remove item from list",
+            "line": " server/routers/listRouter.js:39"
+        },
+        {
+            "message": "Missing item type\nGET /pantry/household/:id\nReturns the pantry for the household\nIncludes two lists: tracked and untracked",
+            "line": " server/routers/pantryRouter.js:6"
+        },
+        {
+            "message": "Missing item type\nGET /pantry/general\nReturns the general pantry (all items)",
+            "line": " server/routers/pantryRouter.js:24"
+        },
+        {
+            "message": "Missing item type\nPOST /pantry\nAdd item to pantry from pantry builder\nNote: For items bought, use /buy",
+            "line": " server/routers/pantryRouter.js:48"
+        },
+        {
+            "message": "Missing item type\nDELETE /pantry\nRemove item from pantry\nNote: This will not add the item to shopping list",
+            "line": " server/routers/pantryRouter.js:67"
+        },
+        {
+            "message": "Missing item type\nGET /user/:id\n \nRetrieves information about user, including received outstanding/pending invites",
+            "line": " server/routers/userRouter.js:6"
+        },
+        {
+            "message": "Missing item type\nPOST /user\n\nIf User exists, return householdId\nIf User doesn't exist, create new User and new Household\n  and return householdId\n\nReceives { \"userId\": \"123abc\", \"email\": \"example@site.com\"}",
+            "line": " server/routers/userRouter.js:36"
+        },
+        {
+            "message": "Missing item type\nPOST /user/invite\n\nCreates an invitation for the user\n \nInvites a user, by email, to a household specified by ID in the request\n\nE.g. John (householdId = abc123) invites Kate at kate@gmail.com\nReceives { \"household\": \"abc123\", \"inviteeEmail\": \"kate@gmail.com\"}",
+            "line": " server/routers/userRouter.js:58"
+        },
+        {
+            "message": "Missing item type\nPUT /user/invite\n\nUpdates user invitation\n\nEither accepts or rejects pending invitation\n\nE.g. Kate accepts John's invitation\nReceives { household: \"abc123\", inviteeEmail: \"kate@gmail.com\", accept: true }",
+            "line": " server/routers/userRouter.js:82"
+        },
+        {
+            "message": "Missing item type\nDELETE /user",
+            "line": " server/routers/userRouter.js:108"
+        }
+    ]
+}
