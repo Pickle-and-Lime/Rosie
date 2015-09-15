@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Household Controller - Rosie</title>
+    <title>loginController - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -101,38 +101,264 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Household Controller Module</h1>
-<div class="box clearfix meta">
+<h1>loginController Class</h1>
+<div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/client_app_household_householdController.js.html#l6"><code>client&#x2F;app&#x2F;household&#x2F;householdController.js:6</code></a>
+            Defined in: <a href="../files/client_app_user_loginController.js.html#l6"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:6</code></a>
         </div>
+
+            Module: <a href="../modules/Login Controller.html">Login Controller</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Household Controller: Controlls household.html and createHousehold.html</p>
+    <p>Anonymous login controller function</p>
 
 </div>
 
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/householdController.html">
-                        householdController
-                    </a>
-                </li>
-            </ul>
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_checkZip">checkZip</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getUser">getUser</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_init">init</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_login">login</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_logout">logout</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_updateUser">updateUser</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_checkZip" class="method item">
+    <h3 class="name"><code>checkZip</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l24"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:24</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function to check for valid zip code</p>
+
     </div>
 
 
-    <div class="yui3-u-1-2">
+
+
+</div>
+<div id="method_getUser" class="method item">
+    <h3 class="name"><code>getUser</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l88"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:88</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function to get user information from server (after Auth0 signin)</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_init" class="method item">
+    <h3 class="name"><code>init</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l11"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:11</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function to initialize scope variables</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_login" class="method item">
+    <h3 class="name"><code>login</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l36"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:36</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function to log a user in (calls Auth0 funciton auth.signin())</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_logout" class="method item">
+    <h3 class="name"><code>logout</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l52"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:52</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function log a user out (calls Auth0 auth.signout()) and clear set angular-storage variables</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_updateUser" class="method item">
+    <h3 class="name"><code>updateUser</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/client_app_user_loginController.js.html#l64"><code>client&#x2F;app&#x2F;user&#x2F;loginController.js:64</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>function to send user information to server to be stored in db, set angular-stoarge vars, redirect to /landing</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
+
+
+
     </div>
 </div>
                     </div>

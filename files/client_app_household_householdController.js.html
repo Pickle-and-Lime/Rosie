@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -100,18 +107,22 @@
     <pre class="code prettyprint linenums">
 /**
  * Household Controller: Controlls household.html and createHousehold.html
- *
  * @module Household Controller
  */
-groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27;$http&#x27;, &#x27;$location&#x27;, &#x27;auth&#x27;, &#x27;store&#x27;, &#x27;$state&#x27;,
-  function ($scope, $http, $location, auth, store, $state) {
+groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27;$http&#x27;, &#x27;$location&#x27;, &#x27;auth&#x27;, &#x27;store&#x27;, &#x27;$state&#x27;, &#x27;States&#x27;,
+  /**
+  * Anonymous household controller function
+  * @class householdController
+  */
+  function ($scope, $http, $location, auth, store, $state, States) {
     /**
      * initializes $scope variables to store received data and interaction states (private)
-     *
-     * @class getUser()
+     * @method init
      */
     var init = function(){
-    //initialize object to hold all scope elements, avoids child scope issues with ng-if statements
+      // set state to &#x27;household&#x27; when loading this view
+      States.setState(&#x27;household&#x27;);
+      //initialize object to hold all scope elements, avoids child scope issues with ng-if statements
       $scope.s = {};
       $scope.s.profile = auth.profile;
       $scope.s.profile.household = {};
@@ -125,7 +136,7 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
       //holds current inputs without saving to the input object
       $scope.s.currentEmail = &quot;&quot;;
 
-      //dynamic class variables for create household button, set to &quot;&quot; to enable button
+      //dynamic method variables for create household button, set to &quot;&quot; to enable button
       $scope.s.createButtonActive = &quot;disabled&quot;;
       $scope.s.addEmailActive = &quot;disabled&quot;;
 
@@ -137,8 +148,7 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
 
     /**
      * function to request user info from server (private)
-     *
-     * @class getUser()
+     * @method getUser
      */
     var getUser = function(){
       $scope.s.getUserFinished = false;
@@ -156,8 +166,7 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
 
     /**
      * function to request household info from server (private)
-     *
-     * @class getHousehold()
+     * @method getHousehold
      */
     var getHousehold = function(){
       $scope.s.getHouseholdFinished = false;
@@ -175,14 +184,14 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
           Materialize.toast(&#x27;Ooops, check your connection and try again.&#x27;, 10000);
       });
     };
+    //invoke getUser and getHousehold on page load
     getUser();
     getHousehold();
 
 
     /**
      * function to store email in local variable until submission occurs (attached to $scope.s)
-     *
-     * @class submitEmail()
+     * @method submitEmail
      */
     $scope.s.submitEmail = function(){
       if ($scope.s.currentEmail !== &quot;&quot;){
@@ -196,8 +205,7 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
     //emailForm is used to check if valid email has been entered, if so it enables add button
     /**
      * function to check that user inputs are valid
-     *
-     * @class checkInputs()
+     * @method checkInputs
      */
     $scope.s.checkInputs = function(emailForm){
       emailForm = emailForm || false;
@@ -225,8 +233,11 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
     //inserts the clicked email into the edit form, deletes it from the input object
     /**
      * function to edit email in list of unsent invitations
-     *
-     * @class editEmail()
+     * @method editEmail
+     * @param email {String}
+     * the email address to edit
+     * @param index {Number}
+     * the index of the email within the $scope.s.inputs.emails array
      */
     $scope.s.editEmail = function(email, index){
       if (!$scope.s.submitted){
@@ -245,16 +256,21 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
     //sends household information to server
     /**
      * function to send household information to server
-     *
-     * @class sendHousehold()
+     * @method sendHousehold
+     * @param cb {Function}
+     * callback to be executed on success
      */
-    var sendHousehold = function(){
+    var sendHousehold = function(cb){
+      cb = cb || null;
       $scope.s.sendHouseholdFinished = false;
       console.log(&#x27;sendHousehold: &#x27; + $scope.s.profile.household.id + &#x27; &#x27; + $scope.s.inputs.householdName);
       $http.put(&#x27;/household&#x27;, {household: $scope.s.profile.household.id, name: $scope.s.inputs.householdName})
         .then(function(res){
           console.log(&#x27;sentHoushold: &#x27;, res);
           $scope.s.sendHouseholdFinished = true;
+          if (cb){
+            cb();
+          }
           redirect();
         }, function(err){
           console.log(&#x27;ERROR in householdController sendHousehold()&#x27;, err);
@@ -266,10 +282,11 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
     //invites each user in an array to join a household, takes callback
     /**
      * function to send invite requests to server for a list of emails
-     *
-     * @class inviteUsers()
-     * @param {Array} emails:  array of &quot;emails&quot;
-     * @param {Function} cb: callback to be executed when invites are successfuly sent
+     * @method inviteUsers
+     * @param emails {Array}
+     * array of &quot;emails&quot;
+     * @param cb {Function}
+     * callback to be executed when invites are successfuly sent
      */
     var inviteUsers = function(emails, cb){
       cb = cb || null;
@@ -299,8 +316,7 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
 
     /**
      * function to redirect to household page when inviteUsersFinished and sendHouseholdFinished
-     *
-     * @class redirect()
+     * @method redirect
      */
     var redirect = function(){
       console.log(&#x27;redirect attempt: &#x27; + $scope.s.inviteUsersFinished + &quot; &quot; + $scope.s.sendHouseholdFinished);
@@ -312,39 +328,39 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
 
     //submits the household data to server, then redirects to household page
     /**
-     * function submit household to server
-     *
-     * @class submitHousehold()
+     * function to submit household to server and then send any invites
+     * @method submitHousehold
      */
     $scope.s.submitHousehold = function(){
       if ($scope.s.createButtonActive !== &quot;disabled&quot;){
         $scope.s.submitted = true;
-        sendHousehold();
-        inviteUsers($scope.s.inputs.emails);
+        sendHousehold(inviteUsers($scope.s.inputs.emails));
       }
     };
 
     //submits a single invite to server
     /**
      * function to submit a single invite to the server
-     *
-     * @class newInvite()
-     * @param {String} email: email to be invited
+     * @method newInvite
+     * @param email {String}
+     * email to be invited
      */
     $scope.s.newInvite = function(email){
-      $scope.s.submitted = true;
-      inviteUsers([email], function(){
-        $scope.s.currentEmail = &quot;&quot;;
-        getHousehold();
-        $scope.s.submitted =  false;
-      });
+      if ($scope.s.currentEmail !== &quot;&quot;){
+        $scope.s.submitted = true;
+        inviteUsers([email], function(){
+          $scope.s.currentEmail = &quot;&quot;;
+          getHousehold();
+          $scope.s.submitted =  false;
+        });
+      }
     };
 
     /**
      * function join household (attached to $scope.s)
-     *
-     * @class joinHouse()
-     * @param {String} hhid: is the householdId to be joined
+     * @method joinHouse
+     * @param hhid {String}
+     * hhid is the householdId to be joined
      */
     $scope.s.joinHouse = function(hhid){
       $scope.s.joinSubmitted = true;
@@ -356,13 +372,31 @@ groceries.controller(&#x27;householdController&#x27;, [&#x27;$scope&#x27;, &#x27
     };
 
     /**
-     * function send request to server to join household (private)
-     *
-     * @class updateHouse()
-     * @param {String} hhid: is the householdId to be joined
-     * @param {String} email: is the current users email
-     * @param {Boolean} accept: true to accept invitation, false to reject
-     * @param {Function} cb: callback to be executed on success
+     * function to reject household invitation (attached to $scope.s)
+     * @method rejectHouse
+     * @param hhid {String}
+     * hhid is the householdId to be rejected
+     */
+    $scope.s.rejectHouse = function(hhid){
+      $scope.s.joinSubmitted = true;
+      updateHouse(hhid, $scope.s.profile.email, false, function(res){
+        store.set(&#x27;householdId&#x27;, res.data);
+        $state.go($state.current, {}, {reload: true});
+      });
+      
+    };
+
+    /**
+     * function to send request to server to join household (private)
+     * @method updateHouse
+     * @param hhid {String}
+     * is the householdId to be joined
+     * @param email {String}
+     * is the current users email
+     * @param accept {Boolean}
+     * true to accept invitation, false to reject
+     * @param cb {Function}
+     * callback to be executed on success
      */
     var updateHouse = function(hhid, email, accept, cb){
       cb = cb || null;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PantryItem - Rosie</title>
+    <title>listCtrl - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -101,80 +101,24 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>PantryItem Class</h1>
+<h1>listCtrl Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/server_controllers_PantryItem.js.html#l13"><code>server&#x2F;controllers&#x2F;PantryItem.js:13</code></a>
+            Defined in: <a href="../files/server_controllers_listController.js.html#l14"><code>server&#x2F;controllers&#x2F;listController.js:14</code></a>
         </div>
 
-            Module: <a href="../modules/PantryItem.html">PantryItem</a>
+            Module: <a href="../modules/listCtrl.html">listCtrl</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Creates a neural network and trainer for an item</p>
+    <p>Provides methods for manipulating household shopping lists</p>
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_PantryItem" class="method item">
-    <h3 class="name"><code>PantryItem</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>item</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/server_controllers_PantryItem.js.html#l13"><code>server&#x2F;controllers&#x2F;PantryItem.js:13</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">item</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the item</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
@@ -192,7 +136,19 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_train">train</a>
+                                <a href="#method_addToList">addToList</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_autoBuildList">autoBuildList</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_buy">buy</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeFromList">removeFromList</a>
 
                             </li>
                     </ul>
@@ -205,20 +161,20 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_train" class="method item">
-    <h3 class="name"><code>train</code></h3>
+<div id="method_addToList" class="method item">
+    <h3 class="name"><code>addToList</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>trainingSet</code>
+                        <code>item</code>
+                </li>
+                <li class="arg">
+                        <code>householdId</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type">Function</span>
-        </span>
 
 
 
@@ -229,7 +185,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_controllers_PantryItem.js.html#l29"><code>server&#x2F;controllers&#x2F;PantryItem.js:29</code></a>
+        <a href="../files/server_controllers_listController.js.html#l76"><code>server&#x2F;controllers&#x2F;listController.js:76</code></a>
         </p>
 
 
@@ -237,10 +193,10 @@
     </div>
 
     <div class="description">
-        <p>Trains an instance of a pantry item with the given trainingSet
-and exports a standalone (trained) neural network as a
-method for that item with no library dependencies.
-See <a href="https://github.com/cazala/synaptic/wiki/Trainer">Synaptic documentation</a></p>
+        <p>Adds an item to a household's shopping list.
+If the item is not already in their pantry, it adds it to the pantry as well.
+If the item is already in their pantry, it updates Rosie's neural network
+to train it to add the item to the list sooner.</p>
 
     </div>
 
@@ -249,13 +205,23 @@ See <a href="https://github.com/cazala/synaptic/wiki/Trainer">Synaptic documenta
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">trainingSet</code>
-                        <span class="type">Array</span>
+                        <code class="param-name">item</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>An array of objects with input and output data for the
-neural network. Ex: <code>[{input: [1], output: [0.1]},{input: [3], output: [0.9]}]</code></p>
+                        <p>the name of the item</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">householdId</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the string that identifies a household in the database</p>
 
                     </div>
 
@@ -263,15 +229,203 @@ neural network. Ex: <code>[{input: [1], output: [0.1]},{input: [3], output: [0.9
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                        <span class="type">Function</span>:
-                    <p>see <a href="https://github.com/cazala/synaptic/wiki/Networks#standalone">Synaptic documentation</a></p>
 
-            </div>
+</div>
+<div id="method_autoBuildList" class="method item">
+    <h3 class="name"><code>autoBuildList</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>householdId</code>
+                </li>
+            </ul><span class="paren">)</span>
         </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/server_controllers_listController.js.html#l22"><code>server&#x2F;controllers&#x2F;listController.js:22</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Generates a shopping list for a household based upon the length of time since
+the item was last purchased, and Rosie's calculated probability that the
+household has run out of that item.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">householdId</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the string that identifies a household in the database</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_buy" class="method item">
+    <h3 class="name"><code>buy</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>items</code>
+                </li>
+                <li class="arg">
+                        <code>householdId</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/server_controllers_listController.js.html#l220"><code>server&#x2F;controllers&#x2F;listController.js:220</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Removes an item from a household's shopping list, updating
+the last purchased date for that item in the pantry and setting
+it's <code>fullyStocked</code> property to <code>true</code>.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">items</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>an array of the names of the items</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">householdId</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the string that identifies a household in the database</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_removeFromList" class="method item">
+    <h3 class="name"><code>removeFromList</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>item</code>
+                </li>
+                <li class="arg">
+                        <code>householdId</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/server_controllers_listController.js.html#l154"><code>server&#x2F;controllers&#x2F;listController.js:154</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Removes an item from a household's shopping list is the user
+doesn't want it there, but hasn't purchased it.
+It also updates Rosie's neural network to train it to
+add the item to the list later.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">item</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the name of the item</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">householdId</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the string that identifies a household in the database</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
 
 
 </div>

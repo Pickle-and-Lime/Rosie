@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>server/user-helpers.js - Rosie</title>
+    <title>server/controllers/userController.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,22 +101,24 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: server/user-helpers.js</h1>
+<h1 class="file-heading">File: server/controllers/userController.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
  * Provides methods for creating and updating Users
- * @class userHelpers
+ * @module userCtrl
+ * @class userCtrl
  * @static
+ * @requires Q, householdModel, userModel, utils
  */
 
-var mongoose = require(&#x27;mongoose&#x27;);
-var Household = require(&#x27;./db/householdModel.js&#x27;);
-var User = require(&#x27;./db/userModel.js&#x27;);
 var Q = require(&#x27;q&#x27;);
+var Household = require(&#x27;../db/householdModel.js&#x27;);
+var User = require(&#x27;../db/userModel.js&#x27;);
+var utils = require(&#x27;./utils.js&#x27;);
 
-module.exports = userHelpers = {
+module.exports = userCtrl = {
 
   /**
    *  Retrieves and returns User information.
@@ -117,14 +126,34 @@ module.exports = userHelpers = {
    *  @method getUser
    *  @param {string}     userId
    *
-   *  @return {Promise}   Callback is supplied with User object.
+   *  @return {Promise}   Callback is supplied with User object. The
+   *  User object is slightly modified to not show full details of any
+   *  households in its list of invitations
    */
   getUser : function(userId) {
     return User.findOne({ userId : userId})
     .then(function(user) {
       if (!user) throw new Error(&#x27;Cannot find user&#x27;);
-      return Q.fcall(function() {
-        return user;
+      // Map over the householdIds and resolve each of them
+      // to their respective households
+      return utils.promiseMap(user.invites, function(householdId){
+        return Household.findById(householdId);
+      })
+      .then(function(resolvedInvites) {
+        var invites = resolvedInvites.map(function(household) {
+          household = household.toObject();
+          delete household.sentInvites;
+          delete household.users;
+          return household;
+        });
+        // user is a type of Model, so convert to object
+        // and replace the invites property
+        // Note: this does not update the DB
+        user = user.toObject();
+        user.invites = invites;
+        return Q.fcall(function() {
+          return user;
+        });
       });
     });
   },
@@ -142,7 +171,7 @@ module.exports = userHelpers = {
    *
    *  @return {Promise}   Callback is supplied with user&#x27;s householdId.
    */
-  getHouseholdForUser : function(userId, email) {
+  getHouseholdForUser : function(userId, email, fullName, picture, zip) {
     return User.findOne({ userId : userId})
     .then(function(user) {
       // If user exists, return the householdId
@@ -152,7 +181,7 @@ module.exports = userHelpers = {
         });
       } else {
         // If user does not exist, create a new one
-        return userHelpers.createUser(userId, email)
+        return userCtrl.createUser(userId, email, fullName, picture, zip)
         .then(function(newUser) {
           return Q.fcall(function() {
             return newUser.householdId;
@@ -172,21 +201,20 @@ module.exports = userHelpers = {
    *
    *  @return {Promise}   Callback is supplied with new User object.
    */
-  createUser : function(userId, email) {
+  createUser : function(userId, email, fullName, picture, zip) {
     // Create new household for the user
     var newHousehold = new Household({});
-    newHousehold.users.push({
-      userId: userId,
-      email: email
-    });
+    newHousehold.users.push(userId);
     return newHousehold.save()
     .then(function() {
       var newUser = new User({
         userId: userId,
         email: email,
-        householdId: newHousehold._id
+        householdId: newHousehold._id,
+        fullName: fullName,
+        picture: picture,
+        zip: zip
       });
-
       return newUser.save()
       .then(function() {
         // Return newly created user
@@ -214,18 +242,14 @@ module.exports = userHelpers = {
       return User.findOne({ email: inviteeEmail })
       .then(function(user) {
         if (!user) throw new Error(&#x27;Cannot find user&#x27;);
-        user.invites.push({
-          householdName: household.name,
-          householdId: household._id
-        });
-        household.sentInvites.push({
-          userId: user.userId,
-          email: inviteeEmail
-        });
+        user.invites.push(household._id);
+        household.sentInvites.push(user.userId);
 
         return household.save()
+        .then(user.save)
         .then(function() {
-          return user.save();
+          // Call getUser to get properly formatted user object
+          return userCtrl.getUser(user.userId);
         });
       });
     });
@@ -250,7 +274,6 @@ module.exports = userHelpers = {
    */
   updateInvitation : function(householdId, inviteeEmail, accept) {
     if (typeof accept !== &#x27;boolean&#x27;) throw new Error(&#x27;&#x60;Accept&#x60; must be a boolean&#x27;);
-
     return Household.findById(householdId)
     .then(function(household) {
       return User.findOne({ email: inviteeEmail })
@@ -258,26 +281,25 @@ module.exports = userHelpers = {
         if (!invitee) throw new Error(&#x27;Cannot find invitee&#x27;);
 
         // Removes invite (and duplicates) from User&#x27;s invites
-        invitee.invites = invitee.invites.filter(function(el) {
-          return el.householdId !== householdId;
+        invitee.invites = invitee.invites.filter(function(id) {
+          return String(id) !== householdId;
         });
 
         // Removes invite (and duplicates) from household&#x27;s sentInvites
-        household.sentInvites = household.sentInvites.filter(function(el) {
-          return el.email !== inviteeEmail;
+        household.sentInvites = household.sentInvites.filter(function(id) {
+          return String(id) !== invitee.userId;
         });
 
         if (accept) {
           invitee.householdId = householdId;
-          household.users.push({
-            userId: invitee.userId,
-            email: inviteeEmail
-          });
+          household.users.push(invitee.userId);
         }
 
         return household.save()
+        .then(invitee.save)
         .then(function() {
-          return invitee.save();
+          // Call getUser to get properly formatted user object
+          return userCtrl.getUser(invitee.userId);
         });
       });
     });

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>newInvite() - Rosie</title>
+    <title>server/routers/itemRouter.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,44 +101,54 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>newInvite() Class</h1>
-<div class="box meta">
+<h1 class="file-heading">File: server/routers/itemRouter.js</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+var express = require(&#x27;express&#x27;);
+var itemController = require(&#x27;../controllers/itemController.js&#x27;);
+var router = express.Router();
 
-        <div class="foundat">
-            Defined in: <a href="../files/client_app_household_householdController.js.html#l228"><code>client&#x2F;app&#x2F;household&#x2F;householdController.js:228</code></a>
-        </div>
+/**
+ *  POST /tag
+ *  Manually add tags to item
+ */
+router.post(&#x27;/tag&#x27;, function(req, res) {
+  var item = req.body.item;
+  var household = req.body.household;
+  var tag = req.body.tag;
 
-            Module: <a href="../modules/Household Controller.html">Household Controller</a>
+  itemController.addTag(tag, item, household)
+  .then(function(list) {
+    res.status(201).send(list);
+  })
+  .catch(function() {
+    res.status(404).send(&#x27;Cannot add tag&#x27;);
+  });
+});
 
-</div>
+/**
+ *  POST /data
+ *  Manually edit expiration and purchase dates of item
+ */
+router.post(&#x27;/data&#x27;, function(req, res) {
+  var item = req.body.item;
+  var household = req.body.household;
+  var category = req.body.category;
+  var expiration = req.body.expiration;
+  var purchase = req.body.purchase;
 
+  itemController.editItem(category, expiration, date, item, household)
+  .then(function(pantry) {
+    res.status(201).send(pantry);
+  })
+  .catch(function() {
+    res.status(404).send(&#x27;Cannot add expiration&#x27;);
+  });
+});
 
-<div class="box intro">
-    <p>function to submit a single invite to the server</p>
-
-</div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-
-
-
-        </div>
-
-
-
-
-    </div>
+module.exports = router;
+    </pre>
 </div>
                     </div>
                 </div>

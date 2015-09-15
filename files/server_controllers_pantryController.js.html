@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>server/pantry-helpers.js - Rosie</title>
+    <title>server/controllers/pantryController.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,18 +101,18 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: server/pantry-helpers.js</h1>
+<h1 class="file-heading">File: server/controllers/pantryController.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
 * Provides methods for creating household pantries and lists
-* @module groceryHelpers
-* @requires Household, appPantry, PantryItem, pantryHelpers, Q
+* @module pantryCtrl
+* @requires householdModel, finalPantry, PantryItem, Q
 */
 
-var Household = require(&#x27;./db/householdModel.js&#x27;);
-var finalPantry = require(&#x27;./db/finalPantry.js&#x27;);
+var Household = require(&#x27;../db/householdModel.js&#x27;);
+var finalPantry = require(&#x27;../db/finalPantry.js&#x27;);
 var appPantry = finalPantry.pantry;
 var categories = finalPantry.categories;
 var PantryItem = require(&#x27;./PantryItem.js&#x27;);
@@ -113,11 +120,11 @@ var Q = require(&#x27;q&#x27;);
 
 /** 
 * Provides methods for manipulating household shopping lists
-* @class pantryHelpers
+* @class pantryCtrl
 * @static
 */
 
-module.exports = pantryHelpers = {
+module.exports = pantryCtrl = {
   /**
   * Updates a household item&#x27;s neural network with additional
   * training data provided when a user adds or removes an
@@ -138,7 +145,9 @@ module.exports = pantryHelpers = {
     var trained = pantryItem.train(itemProps.trainingSet);
     // Add new standalone fn to item pantry
     itemProps.network = trained.toString();
+    //update fullyStocked and tracked properties
     itemProps.fullyStocked = fullyStocked;
+    itemProps.tracked = true;
     //Mark pantry modified because it is a mixed datatype in db
     household.markModified(&#x27;pantry&#x27;);
     //Save changes
@@ -168,7 +177,6 @@ module.exports = pantryHelpers = {
         }
         //stores today&#x27;s date if no date is passed in
         var date = month ? new Date(2015, month, day) : new Date();
-        console.log(&#x27;ITEM&#x27;,item);
         //check if the item is in the general pantry
         if (appPantry[item]){
           //train item for that household with their own data if it exists, or with the general data
@@ -201,13 +209,13 @@ module.exports = pantryHelpers = {
           household.pantry[item] = {
             tracked : false,
             network: null,
-            trainingSet : null,
+            trainingSet : [],
             date: date,
             fullyStocked : true, 
             expiration : undefined,
             category : undefined,
-            tags : undefined,
-            seasons : undefined
+            tags : [],
+            seasons : []
           }; 
           //Mark pantry modified because it is a mixed datatype in db
           household.markModified(&#x27;pantry&#x27;);
@@ -235,12 +243,16 @@ module.exports = pantryHelpers = {
   //and hide them from displaying in their pantry in the frontend instead of 
   //completely deleting from the db 
   removeFromPantry : function(item, householdId){
-    return Household.findOne({ _id: householdId }, &#x27;pantry&#x27;)
+    return Household.findOne({ _id: householdId }, &#x27;list pantry&#x27;)
     .then(function(household){
       if (household) {
+        //remove item from the pantry
         delete household.pantry[item];
-
-        //Mark pantry modified because it is a mixed datatype in db
+        //remove the item from the household&#x27;s shopping list if it is there
+        delete household.list[item];
+        
+        //Mark list and pantry modified because they are a mixed datatype in db
+        household.markModified(&#x27;list&#x27;);
         household.markModified(&#x27;pantry&#x27;);
         //Save changes
         return household.save()
@@ -248,6 +260,7 @@ module.exports = pantryHelpers = {
           // Allows removeFromPantry to be chainable
           return Q.fcall(function() {
             return household.pantry;
+            // return household;
           });
         });
       } else {
@@ -296,7 +309,6 @@ module.exports = pantryHelpers = {
       if (household) {
         var result = {};
         for (var item in household.pantry) {
-          console.log(&#x27;ITEM&#x27;, item);
           result[item] = {
             tracked: household.pantry[item].tracked,
             fullyStocked: household.pantry[item].fullyStocked,
@@ -324,16 +336,6 @@ module.exports = pantryHelpers = {
   * the general pantry, including the properties of each item
   */
   getAppPantry : function() {
-    // // Simply return a list of the key names in appPantry
-    // // which are all the products we track
-    // // The value could be anything the frontend needs
-    // var result = {};
-    // for (var item in appPantry) {
-    //   // result[item] = true;
-    //   result[item] = { // populating the master pantry list with the category
-    //     category: appPantry[item].category
-    //   };
-    // }
     return Q.fcall(function() {
       return appPantry;
     });

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>listHelpers - Rosie</title>
+    <title>itemCtrl - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,15 +101,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>listHelpers Class</h1>
+<h1>itemCtrl Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/server_list-helpers.js.html#l13"><code>server&#x2F;list-helpers.js:13</code></a>
+            Defined in: <a href="../files/server_controllers_itemController.js.html#l9"><code>server&#x2F;controllers&#x2F;itemController.js:9</code></a>
         </div>
 
-            Module: <a href="../modules/groceryHelpers.html">groceryHelpers</a>
+            Module: <a href="../modules/itemCtrl.html">itemCtrl</a>
 
 </div>
 
@@ -129,19 +136,11 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_addToList">addToList</a>
+                                <a href="#method_addTag">addTag</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_autoBuildList">autoBuildList</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_buy">buy</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_removeFromList">removeFromList</a>
+                                <a href="#method_editItem">editItem</a>
 
                             </li>
                             <li class="index-item method">
@@ -158,11 +157,14 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_addToList" class="method item">
-    <h3 class="name"><code>addToList</code></h3>
+<div id="method_addTag" class="method item">
+    <h3 class="name"><code>addTag</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>tag</code>
+                </li>
                 <li class="arg">
                         <code>item</code>
                 </li>
@@ -182,7 +184,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_list-helpers.js.html#l87"><code>server&#x2F;list-helpers.js:87</code></a>
+        <a href="../files/server_controllers_itemController.js.html#l17"><code>server&#x2F;controllers&#x2F;itemController.js:17</code></a>
         </p>
 
 
@@ -190,10 +192,7 @@
     </div>
 
     <div class="description">
-        <p>Adds an item to a household's shopping list.
-If the item is not already in their pantry, it adds it to the pantry as well.
-If the item is already in their pantry, it updates Rosie's neural network
-to train it to add the item to the list sooner.</p>
+        <p>Adds new tags to an item in a household's shopping list, and saves it in the pantry for future use</p>
 
     </div>
 
@@ -201,14 +200,23 @@ to train it to add the item to the list sooner.</p>
             <h4>Parameters:</h4>
 
             <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">tag</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
                 <li class="param">
                         <code class="param-name">item</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the name of the item</p>
-
+                         
                     </div>
 
                 </li>
@@ -218,8 +226,7 @@ to train it to add the item to the list sooner.</p>
 
 
                     <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
+                         
                     </div>
 
                 </li>
@@ -229,137 +236,20 @@ to train it to add the item to the list sooner.</p>
 
 
 </div>
-<div id="method_autoBuildList" class="method item">
-    <h3 class="name"><code>autoBuildList</code></h3>
+<div id="method_editItem" class="method item">
+    <h3 class="name"><code>editItem</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>householdId</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/server_list-helpers.js.html#l33"><code>server&#x2F;list-helpers.js:33</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Generates a shopping list for a household based upon the length of time since
-the item was last purchased, and Rosie's calculated probability that the
-household has run out of that item.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">householdId</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_buy" class="method item">
-    <h3 class="name"><code>buy</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>items</code>
+                        <code>category</code>
                 </li>
                 <li class="arg">
-                        <code>householdId</code>
+                        <code>expiration</code>
                 </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/server_list-helpers.js.html#l224"><code>server&#x2F;list-helpers.js:224</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Removes an item from a household's shopping list, updating
-the last purchased date for that item in the pantry and setting
-it's <code>fullyStocked</code> property to <code>true</code>.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">items</code>
-                        <span class="type">Array</span>
-
-
-                    <div class="param-description">
-                        <p>an array of the names of the items</p>
-
-                    </div>
-
+                <li class="arg">
+                        <code>purchased</code>
                 </li>
-                <li class="param">
-                        <code class="param-name">householdId</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_removeFromList" class="method item">
-    <h3 class="name"><code>removeFromList</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
                         <code>item</code>
                 </li>
@@ -379,7 +269,7 @@ it's <code>fullyStocked</code> property to <code>true</code>.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_list-helpers.js.html#l157"><code>server&#x2F;list-helpers.js:157</code></a>
+        <a href="../files/server_controllers_itemController.js.html#l39"><code>server&#x2F;controllers&#x2F;itemController.js:39</code></a>
         </p>
 
 
@@ -387,10 +277,7 @@ it's <code>fullyStocked</code> property to <code>true</code>.</p>
     </div>
 
     <div class="description">
-        <p>Removes an item from a household's shopping list is the user
-doesn't want it there, but hasn't purchased it.
-It also updates Rosie's neural network to train it to
-add the item to the list later.</p>
+        <p>Edits data associated with an item in a household's pantry</p>
 
     </div>
 
@@ -399,13 +286,45 @@ add the item to the list later.</p>
 
             <ul class="params-list">
                 <li class="param">
+                        <code class="param-name">category</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>The category to which the item belongs</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">expiration</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>The estimated expiration time for an item</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">purchased</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>The date the item was last purchased</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
                         <code class="param-name">item</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the name of the item</p>
-
+                         
                     </div>
 
                 </li>
@@ -415,8 +334,7 @@ add the item to the list later.</p>
 
 
                     <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
+                         
                     </div>
 
                 </li>
@@ -450,7 +368,7 @@ add the item to the list later.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_list-helpers.js.html#l20"><code>server&#x2F;list-helpers.js:20</code></a>
+        <a href="../files/server_controllers_itemController.js.html#l64"><code>server&#x2F;controllers&#x2F;itemController.js:64</code></a>
         </p>
 
 

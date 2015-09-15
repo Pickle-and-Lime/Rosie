@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>pantryHelpers - Rosie</title>
+    <title>userCtrl - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,21 +101,21 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>pantryHelpers Class</h1>
+<h1>userCtrl Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/server_pantry-helpers.js.html#l14"><code>server&#x2F;pantry-helpers.js:14</code></a>
+            Defined in: <a href="../files/server_controllers_userController.js.html#l1"><code>server&#x2F;controllers&#x2F;userController.js:1</code></a>
         </div>
 
-            Module: <a href="../modules/groceryHelpers.html">groceryHelpers</a>
+            Module: <a href="../modules/userCtrl.html">userCtrl</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Provides methods for manipulating household shopping lists</p>
+    <p>Provides methods for creating and updating Users</p>
 
 </div>
 
@@ -129,28 +136,23 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_addToPantry">addToPantry</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_getPantry">getPantry</a>
+                                <a href="#method_createInvitation">createInvitation</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getPantry">getPantry</a>
+                                <a href="#method_createUser">createUser</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_removeFromPantry">removeFromPantry</a>
+                                <a href="#method_getHouseholdForUser">getHouseholdForUser</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_updateExpTime">updateExpTime</a>
+                                <a href="#method_getUser">getUser</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_updateItemNetwork">updateItemNetwork</a>
+                                <a href="#method_updateInvitation">updateInvitation</a>
 
                             </li>
                     </ul>
@@ -163,119 +165,22 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_addToPantry" class="method item">
-    <h3 class="name"><code>addToPantry</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>item</code>
-                </li>
-                <li class="arg">
-                        <code>householdId</code>
-                </li>
-                <li class="arg">
-                        <code class="optional">[month=now]</code>
-                </li>
-                <li class="arg">
-                        <code class="optional">[day=now]</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/server_pantry-helpers.js.html#l48"><code>server&#x2F;pantry-helpers.js:48</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Adds an item to a household's pantry when they either purchase the item,
-or add it from the app's general pantry list.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">item</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the item</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">householdId</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name optional">[month=now]</code>
-                        <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-
-
-                    <div class="param-description">
-                        <p>allows manual input of the month the item was last purchased</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name optional">[day=now]</code>
-                        <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-
-
-                    <div class="param-description">
-                        <p>allows manual input of the day the item was last purchased</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_getPantry" class="method item">
-    <h3 class="name"><code>getPantry</code></h3>
+<div id="method_createInvitation" class="method item">
+    <h3 class="name"><code>createInvitation</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
                         <code>householdId</code>
+                </li>
+                <li class="arg">
+                        <code>inviteeEmail</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Promise</span>
         </span>
 
 
@@ -287,7 +192,7 @@ or add it from the app's general pantry list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_pantry-helpers.js.html#l185"><code>server&#x2F;pantry-helpers.js:185</code></a>
+        <a href="../files/server_controllers_userController.js.html#l121"><code>server&#x2F;controllers&#x2F;userController.js:121</code></a>
         </p>
 
 
@@ -295,7 +200,9 @@ or add it from the app's general pantry list.</p>
     </div>
 
     <div class="description">
-        <p>Return a specific household's pantry</p>
+        <p>Adds the inviters Household information into the invitee's <code>invites</code> property,
+and adds invitee's email to the households sent invites list.
+If invitation already exists, do nothing and return successfully.</p>
 
     </div>
 
@@ -309,8 +216,17 @@ or add it from the app's general pantry list.</p>
 
 
                     <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
+                         
+                    </div>
 
+                </li>
+                <li class="param">
+                        <code class="param-name">inviteeEmail</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                         
                     </div>
 
                 </li>
@@ -321,21 +237,30 @@ or add it from the app's general pantry list.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>the household's pantry, including the properties of each item</p>
+                        <span class="type">Promise</span>:
+                    <p>Callback is supplied with invitee's User object.</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_getPantry" class="method item">
-    <h3 class="name"><code>getPantry</code></h3>
+<div id="method_createUser" class="method item">
+    <h3 class="name"><code>createUser</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>userId</code>
+                </li>
+                <li class="arg">
+                        <code>email</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Promise</span>
         </span>
 
 
@@ -347,7 +272,7 @@ or add it from the app's general pantry list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_pantry-helpers.js.html#l220"><code>server&#x2F;pantry-helpers.js:220</code></a>
+        <a href="../files/server_controllers_userController.js.html#l87"><code>server&#x2F;controllers&#x2F;userController.js:87</code></a>
         </p>
 
 
@@ -355,37 +280,67 @@ or add it from the app's general pantry list.</p>
     </div>
 
     <div class="description">
-        <p>Return the general pantry</p>
+        <p>Creates a new User and a new Household for that user.
+The user is added to the households <code>users</code> property.</p>
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">userId</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">email</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
         <div class="returns">
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>the general pantry, including the properties of each item</p>
+                        <span class="type">Promise</span>:
+                    <p>Callback is supplied with new User object.</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_removeFromPantry" class="method item">
-    <h3 class="name"><code>removeFromPantry</code></h3>
+<div id="method_getHouseholdForUser" class="method item">
+    <h3 class="name"><code>getHouseholdForUser</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>item</code>
+                        <code>userId</code>
                 </li>
                 <li class="arg">
-                        <code>householdId</code>
+                        <code>email</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
 
 
 
@@ -396,7 +351,7 @@ or add it from the app's general pantry list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_pantry-helpers.js.html#l124"><code>server&#x2F;pantry-helpers.js:124</code></a>
+        <a href="../files/server_controllers_userController.js.html#l54"><code>server&#x2F;controllers&#x2F;userController.js:54</code></a>
         </p>
 
 
@@ -404,7 +359,10 @@ or add it from the app's general pantry list.</p>
     </div>
 
     <div class="description">
-        <p>Completely removes an item from a households's pantry</p>
+        <p>Retrieves and returns the householdId for a user.</p>
+<p>If the user does not exist, it will create a new user with the
+supplied userId and email. In this way, there is no separation
+between signing in and signing up from the client's perspective.</p>
 
     </div>
 
@@ -413,50 +371,54 @@ or add it from the app's general pantry list.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">item</code>
+                        <code class="param-name">userId</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the name of the item</p>
-
+                         
                     </div>
 
                 </li>
                 <li class="param">
-                        <code class="param-name">householdId</code>
+                        <code class="param-name">email</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
+                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>Callback is supplied with user's householdId.</p>
+
+            </div>
+        </div>
 
 
 </div>
-<div id="method_updateExpTime" class="method item">
-    <h3 class="name"><code>updateExpTime</code></h3>
+<div id="method_getUser" class="method item">
+    <h3 class="name"><code>getUser</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>item</code>
-                </li>
-                <li class="arg">
-                        <code>householdId</code>
-                </li>
-                <li class="arg">
-                        <code>time</code>
+                        <code>userId</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
 
 
 
@@ -467,7 +429,7 @@ or add it from the app's general pantry list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_pantry-helpers.js.html#l159"><code>server&#x2F;pantry-helpers.js:159</code></a>
+        <a href="../files/server_controllers_userController.js.html#l16"><code>server&#x2F;controllers&#x2F;userController.js:16</code></a>
         </p>
 
 
@@ -475,7 +437,7 @@ or add it from the app's general pantry list.</p>
     </div>
 
     <div class="description">
-        <p>Updates an item's default expiration time</p>
+        <p>Retrieves and returns User information.</p>
 
     </div>
 
@@ -484,64 +446,52 @@ or add it from the app's general pantry list.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">item</code>
+                        <code class="param-name">userId</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the name of the item</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">householdId</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the string that identifies a household in the database</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">time</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>the length of time (in days) from purchase to expiration</p>
-
+                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>Callback is supplied with User object. The
+User object is slightly modified to not show full details of any
+households in its list of invitations</p>
+
+            </div>
+        </div>
 
 
 </div>
-<div id="method_updateItemNetwork" class="method item">
-    <h3 class="name"><code>updateItemNetwork</code></h3>
+<div id="method_updateInvitation" class="method item">
+    <h3 class="name"><code>updateInvitation</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>item</code>
+                        <code>householdId</code>
                 </li>
                 <li class="arg">
-                        <code>itemProps</code>
+                        <code>inviteeEmail</code>
                 </li>
                 <li class="arg">
-                        <code>household</code>
-                </li>
-                <li class="arg">
-                        <code>fullyStocked</code>
+                        <code>accept</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
 
 
 
@@ -552,7 +502,7 @@ or add it from the app's general pantry list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/server_pantry-helpers.js.html#l21"><code>server&#x2F;pantry-helpers.js:21</code></a>
+        <a href="../files/server_controllers_userController.js.html#l151"><code>server&#x2F;controllers&#x2F;userController.js:151</code></a>
         </p>
 
 
@@ -560,9 +510,12 @@ or add it from the app's general pantry list.</p>
     </div>
 
     <div class="description">
-        <p>Updates a household item's neural network with additional
-training data provided when a user adds or removes an
-item from their shopping list.</p>
+        <p>Accepts or rejects the invitation.</p>
+<p>Accepting will change the invitee's HouseholdId to
+the creator's householdId, and add the invitee's email
+to the creator household's users list.</p>
+<p>Both accept and reject will remove the household's invite from
+the User's <code>invites</code> array, and from the household's <code>sentInvites</code> array</p>
 
     </div>
 
@@ -571,52 +524,47 @@ item from their shopping list.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">item</code>
+                        <code class="param-name">householdId</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the name of the item to update</p>
-
+                         
                     </div>
 
                 </li>
                 <li class="param">
-                        <code class="param-name">itemProps</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">inviteeEmail</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the current properties of the item in the household's pantry</p>
-
+                         
                     </div>
 
                 </li>
                 <li class="param">
-                        <code class="param-name">household</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>the household object returned from the database</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">fullyStocked</code>
+                        <code class="param-name">accept</code>
                         <span class="type">Boolean</span>
 
 
                     <div class="param-description">
-                        <p>if true, the item is fully stocked, if false, it is not</p>
-
+                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>Callback is supplied with invitee's User object</p>
+
+            </div>
+        </div>
 
 
 </div>

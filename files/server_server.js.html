@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>server/PantryItem.js - Rosie</title>
+    <title>server/server.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,60 +101,49 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: server/PantryItem.js</h1>
+<h1 class="file-heading">File: server/server.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* This module sets up individual items in the general pantry
-* It creates a neural network for each item and sets default values for
-* the trainingSet and average time to expiration for each item.
-* It also creates methods for creating and updating user-specific pantry items.
-* @module nn-helpers
+* configures server routes
+* @module app
+* @class app
+* @requires express, body-parser, listRouter, pantryRouter, itemRouter, 
+* householdRouter, userRouter, buyRouter, merketRouter
 */
-
-var synaptic = require(&#x27;synaptic&#x27;);
-var Trainer = synaptic.Trainer, Architect = synaptic.Architect;
-
-/**
-* Creates an item that will be stored in the general pantry
-* @class PantryItem
-* @contstructor
-* @param item {String}
-* the name of the item
-*/
-
-var PantryItem = function(item){
-  //create the network using a long short term memory architecture
-  // that has one input neuron, one hidden neuron, and one output neuron
-  this.network = new Architect.LSTM(1, 1, 1);
-  //create a trainer for the network
-  this.trainer = new Trainer(this.network);
-};
-
-/**
-* Trains an instance of a pantry item with the given trainingSet
-* and exports a standalone (trained) neural network as a
-* method for that item with no library dependencies.
-* @method train
-* @param trainingSet {Array}
-* An array of objects with input and output data for the
-* neural network. Ex: [{input: [1], output: [0.9]}]
-* See [Synaptic documentation](https://github.com/cazala/synaptic/wiki/Trainer)
-* @return {Function}
-* see [Synaptic documentation](https://github.com/cazala/synaptic/wiki/Networks#standalone)
-*/
-PantryItem.prototype.train = function(trainingSet){
-  //train the network using the given trainingSet
-  this.trainer.train(trainingSet);
-  //return a standalone function for the network that 
-  //does not rely on any dependencies
-  return this.network.standalone(); 
-};
-
-module.exports = PantryItem;
+var express = require(&#x27;express&#x27;);
+var bodyParser = require(&#x27;body-parser&#x27;);
+var listRouter = require(&#x27;./routers/listRouter&#x27;);
+var pantryRouter = require(&#x27;./routers/pantryRouter&#x27;);
+var itemRouter = require(&#x27;./routers/itemRouter&#x27;);
+var householdRouter = require(&#x27;./routers/householdRouter&#x27;);
+var userRouter = require(&#x27;./routers/userRouter&#x27;);
+var buyRouter = require(&#x27;./routers/buyRouter&#x27;);
+var marketRouter = require(&#x27;./routers/marketRouter&#x27;);
 
 
+var app = express();
+
+app.use(bodyParser.json());
+
+// For local, navigate to 127.0.0.1:1337/app
+if (process.env.NODE_ENV === &#x27;production&#x27;) {
+  app.use(express.static(&#x27;./public&#x27;));
+} else {
+  console.log(&quot;Using client!&quot;);
+  app.use(express.static(&#x27;./client&#x27;));
+}
+
+app.use(&#x27;/list&#x27;, listRouter);
+app.use(&#x27;/pantry&#x27;, pantryRouter);
+app.use(&#x27;/household&#x27;, householdRouter);
+app.use(&#x27;/user&#x27;, userRouter);
+app.use(&#x27;/buy&#x27;, buyRouter);
+app.use(&#x27;/item&#x27;, itemRouter);
+app.use(&#x27;/markets&#x27;, marketRouter);
+
+module.exports = app;
     </pre>
 </div>
                     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Household Controller - Rosie</title>
+    <title>server/controllers/householdController.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -101,39 +101,88 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Household Controller Module</h1>
-<div class="box clearfix meta">
+<h1 class="file-heading">File: server/controllers/householdController.js</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Provides methods for working with households
+ * @module householdCtrl
+ * @class householdCtrl
+ * @static
+ * @requires Q, householdModel, userModel, utils
+ */
 
-        <div class="foundat">
-            Defined in: <a href="../files/client_app_household_householdController.js.html#l6"><code>client&#x2F;app&#x2F;household&#x2F;householdController.js:6</code></a>
-        </div>
+var Household = require(&#x27;../db/householdModel.js&#x27;);
+var User = require(&#x27;../db/userModel.js&#x27;);
+var Q = require(&#x27;q&#x27;);
+var utils = require(&#x27;./utils.js&#x27;);
 
-</div>
+module.exports = householdCtrl = {
 
+  /**
+  * @method getHousehold
+  * @param householdId
+  */
+  getHousehold : function(householdId) {
+    return Household.findById(householdId)
+    .then(function(household) {
+      return utils.promiseMap(household.users, function(userId){
+        return User.findOne({userId: userId});
+      })
+      .then(function(resolvedUsers) {
+        var users = resolvedUsers.map(function(user) {
+          user = user.toObject();
+          delete user.invites;
+          return user;
+        });
 
-<div class="box intro">
-    <p>Household Controller: Controlls household.html and createHousehold.html</p>
+        return utils.promiseMap(household.sentInvites, function(userId){
+          return User.findOne({userId: userId});
+        })
+        .then(function(resolvedSentInvites) {
+          var sentInvites = resolvedSentInvites.map(function(user) {
+            user = user.toObject();
+            delete user.invites;
+            return user;
+          });
 
-</div>
+          household = household.toObject();
+          household.users = users;
+          household.sentInvites = sentInvites;
+          return Q.fcall(function() {
+            return household;
+          });
+        });
+      });
+    });
+  },
 
+  /**
+  * @method updateHousehold
+  * @param househodId 
+  * @param name
+  */
+  updateHousehold : function(householdId, name) {
+    return Household.findById(householdId)
+    .then(function(household) {
+      household.name = name;
+      return household.save();
+    });
+  },
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
+  /**
+  * @method removeHousehold
+  * @param householdId
+  */
+  removeHousehold : function(householdId) {
+    return Household.remove({ _id: householdId }, function(err) {
+      if (err) console.error(err);
+    });
+  }
+};
 
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/householdController.html">
-                        householdController
-                    </a>
-                </li>
-            </ul>
-    </div>
-
-
-    <div class="yui3-u-1-2">
-    </div>
+    </pre>
 </div>
                     </div>
                 </div>

@@ -38,29 +38,36 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
-                                <li><a href="../classes/checkInputs().html">checkInputs()</a></li>
-                                <li><a href="../classes/editEmail().html">editEmail()</a></li>
-                                <li><a href="../classes/getHousehold().html">getHousehold()</a></li>
-                                <li><a href="../classes/getUser().html">getUser()</a></li>
-                                <li><a href="../classes/inviteUsers().html">inviteUsers()</a></li>
-                                <li><a href="../classes/joinHouse().html">joinHouse()</a></li>
-                                <li><a href="../classes/listHelpers.html">listHelpers</a></li>
-                                <li><a href="../classes/newInvite().html">newInvite()</a></li>
-                                <li><a href="../classes/pantryHelpers.html">pantryHelpers</a></li>
+                                <li><a href="../classes/app.html">app</a></li>
+                                <li><a href="../classes/db.html">db</a></li>
+                                <li><a href="../classes/householdController.html">householdController</a></li>
+                                <li><a href="../classes/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../classes/householdModel.html">householdModel</a></li>
+                                <li><a href="../classes/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../classes/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../classes/loginController.html">loginController</a></li>
+                                <li><a href="../classes/pantryCtrl.html">pantryCtrl</a></li>
                                 <li><a href="../classes/PantryItem.html">PantryItem</a></li>
-                                <li><a href="../classes/redirect().html">redirect()</a></li>
-                                <li><a href="../classes/sendHousehold().html">sendHousehold()</a></li>
-                                <li><a href="../classes/submitEmail().html">submitEmail()</a></li>
-                                <li><a href="../classes/submitHousehold().html">submitHousehold()</a></li>
-                                <li><a href="../classes/updateHouse().html">updateHouse()</a></li>
-                                <li><a href="../classes/userHelpers.html">userHelpers</a></li>
+                                <li><a href="../classes/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../classes/userModel.html">userModel</a></li>
+                                <li><a href="../classes/utils.html">utils</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/groceryHelpers.html">groceryHelpers</a></li>
+                                <li><a href="../modules/app.html">app</a></li>
+                                <li><a href="../modules/db.html">db</a></li>
                                 <li><a href="../modules/Household Controller.html">Household Controller</a></li>
-                                <li><a href="../modules/nn-helpers.html">nn-helpers</a></li>
+                                <li><a href="../modules/householdCtrl.html">householdCtrl</a></li>
+                                <li><a href="../modules/householdModel.html">householdModel</a></li>
+                                <li><a href="../modules/itemCtrl.html">itemCtrl</a></li>
+                                <li><a href="../modules/listCtrl.html">listCtrl</a></li>
+                                <li><a href="../modules/Login Controller.html">Login Controller</a></li>
+                                <li><a href="../modules/pantryCtrl.html">pantryCtrl</a></li>
+                                <li><a href="../modules/PantryItem.html">PantryItem</a></li>
+                                <li><a href="../modules/userCtrl.html">userCtrl</a></li>
+                                <li><a href="../modules/userModel.html">userModel</a></li>
+                                <li><a href="../modules/utils.html">utils</a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,8 +106,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 var express = require(&#x27;express&#x27;);
-var Q = require(&#x27;q&#x27;);
-var pantryHelpers = require(&#x27;../pantry-helpers.js&#x27;);
+var pantryController = require(&#x27;../controllers/pantryController.js&#x27;);
 var router = express.Router();
 
 /**
@@ -111,9 +117,8 @@ var router = express.Router();
 router.get(&#x27;/household/:id&#x27;, function(req, res) {
   var household = req.params.id;
 
-  pantryHelpers.getPantry(household)
+  pantryController.getPantry(household)
   .then(function(pantry) {
-    console.log(&#x27;PANTRY&#x27;, pantry);
     res.send(pantry);
   })
   .catch(function(err) {
@@ -126,7 +131,7 @@ router.get(&#x27;/household/:id&#x27;, function(req, res) {
  *  Returns the general pantry (all items)
  */
 router.get(&#x27;/general&#x27;, function(req, res) {
-  pantryHelpers.getAppPantry()
+  pantryController.getAppPantry()
   .then(function(appPantry) {
     res.send(appPantry);
   })
@@ -136,7 +141,7 @@ router.get(&#x27;/general&#x27;, function(req, res) {
 });
 
 router.get(&#x27;/categories&#x27;, function(req, res) {
-  pantryHelpers.getItemCategories()
+  pantryController.getItemCategories()
   .then(function(categories) {
     res.send(categories);
   })
@@ -154,9 +159,8 @@ router.post(&#x27;/&#x27;, function(req, res) {
   var item = req.body.item;
   var household = req.body.household;
 
-  pantryHelpers.addToPantry(item, household)
+  pantryController.addToPantry(item, household)
   .then(function(pantry) {
-    console.log(&#x27;PANTRY&#x27;,pantry);
     res.status(201).send(pantry);
   })
   .catch(function() {
@@ -169,11 +173,10 @@ router.post(&#x27;/&#x27;, function(req, res) {
  *  Remove item from pantry
  *  Note: This will not add the item to shopping list
  */
-router.delete(&#x27;/&#x27;, function(req, res) {
-  var item = req.body.item;
-  var household = req.body.household;
-
-  pantryHelpers.removeFromPantry(item, household)
+router.delete(&#x27;/:id/:item&#x27;, function(req, res) {
+  var item = req.params.item;
+  var household = req.params.id;
+  pantryController.removeFromPantry(item, household)
   .then(function(pantry) {
     res.send(pantry);
   })

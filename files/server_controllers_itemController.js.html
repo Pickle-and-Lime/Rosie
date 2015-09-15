@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Household Controller - Rosie</title>
+    <title>server/controllers/itemController.js - Rosie</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -101,39 +101,87 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Household Controller Module</h1>
-<div class="box clearfix meta">
+<h1 class="file-heading">File: server/controllers/itemController.js</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+* Provides methods for creating household pantries and lists
+* @module itemCtrl
+* @requires householdModel
+*/
 
-        <div class="foundat">
-            Defined in: <a href="../files/client_app_household_householdController.js.html#l6"><code>client&#x2F;app&#x2F;household&#x2F;householdController.js:6</code></a>
-        </div>
+var Household = require(&#x27;../db/householdModel.js&#x27;);
 
-</div>
+/** 
+* Provides methods for manipulating household shopping lists
+* @class itemCtrl
+* @static
+*/
 
+module.exports = itemCtrl = {
 
-<div class="box intro">
-    <p>Household Controller: Controlls household.html and createHousehold.html</p>
+  /**
+  * Adds new tags to an item in a household&#x27;s shopping list, and saves it in the pantry for future use
+  * @method addTag
+  * @param tag {String}
+  * @param item {String}
+  * @param householdId {String}
+  */
+  addTag : function(tag, item, householdId){
+    return Household.findOne({ _id: householdId }, &#x27;pantry list&#x27;)
+    .then(function(household) {
+      household.pantry[item].tags.push(tag);
+      if (household.list[item]){
+        household.list[item].tags.push(tag);
+      }
+      //Mark list modified because it is a mixed datatype in db
+      household.markModified(&#x27;pantry&#x27;);
+      household.markModified(&#x27;list&#x27;);
+      //Save changes
+      return household.save();
+    });
+  }, 
 
-</div>
+  /**
+  * Edits data associated with an item in a household&#x27;s pantry
+  * @method editItem
+  * @param category {String}
+  * The category to which the item belongs
+  * @param expiration {String}
+  * The estimated expiration time for an item
+  * @param purchased {String}
+  * The date the item was last purchased
+  * @param item {String}
+  * @param householdId {String}
+  */
+  editItem : function(category, expiration, purchased, item, householdId){
+    return Household.findOne({ _id: householdId }, &#x27;pantry&#x27;)
+    .then(function(household) {
+      household.pantry[item].category = category;
+      household.pantry[item].expiration = expiration;
+      household.pantry[item].date = purchased;
+      //Mark list modified because it is a mixed datatype in db
+      household.markModified(&#x27;pantry&#x27;);
+      //Save changes
+      return household.save();
+    });
+  },
 
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/householdController.html">
-                        householdController
-                    </a>
-                </li>
-            </ul>
-    </div>
-
-
-    <div class="yui3-u-1-2">
-    </div>
+  /**
+  * Calculate the amount of time that has passed since the item was purchased
+  * @method timeSincePurchase
+  * @param date {Date}
+  * the date the item was last purchased
+  * @return {Number}
+  * the time in days since the item was last purchased
+  */  
+  timeSincePurchase : function(date){
+    var diff = (new Date() - date.getTime())/ (24 * 60 * 60 * 1000);
+    return Math.round(diff);
+  }
+};
+    </pre>
 </div>
                     </div>
                 </div>
