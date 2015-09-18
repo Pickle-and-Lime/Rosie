@@ -2,8 +2,21 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 
-var appKey = process.env.YUMMLY_API_KEY || require('../../config/config.js').yummlyAppKey;
-var appID = process.env.YUMMLY_API_ID || require('../../config/config.js').yummlyAppID;
+/*@if NODE_ENV='production'
+var appKey = process.env.YUMMLY_API_KEY;
+/* @endif */
+
+/*@if NODE_ENV='development'
+var appKey = require('../../../config/config.js').yummlyAppKey;
+/* @endif */
+
+/*@if NODE_ENV='production'
+var appID = process.env.YUMMLY_API_ID;
+/* @endif */
+
+/*@if NODE_ENV='development'
+var appID = require('../../../config/config.js').yummlyAppID;
+/* @endif */
 
 /**
  *  GET /recipes/search

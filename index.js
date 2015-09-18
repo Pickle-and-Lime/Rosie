@@ -1,5 +1,5 @@
-var db = require('./server/db.js');
-var server = require('./server/server');
+var db = require('./public/server/db.js');
+var server = require('./public/server/server');
 var port = process.env.PORT || 1337;
 
 server.listen(port, function () {

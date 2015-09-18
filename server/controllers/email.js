@@ -5,7 +5,15 @@
  * @static
  */
 var mandrill = require('mandrill-api/mandrill');
-var mandrillAPIKey = process.env.MANDRILL_API_KEY || require('../../config/config').MandrillAPIKey;
+
+/*@if NODE_ENV='production'
+var mandrillAPIKey = process.env.MANDRILL_API_KEY
+/* @endif */
+
+/*@if NODE_ENV='development'
+var mandrillAPIKey = require('../../../config/config').MandrillAPIKey;
+/* @endif */
+
 var mandrill_client = new mandrill.Mandrill(mandrillAPIKey);
 var utils = require('./utils');
   
