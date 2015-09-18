@@ -16,7 +16,8 @@ var gulp = require('gulp'),
   exec = require('child_process').exec,
   nodemon = require('gulp-nodemon'),
   open = require('gulp-open'),
-  Server = require('karma').Server;
+  Server = require('karma').Server,
+  preprocess = require('gulp-preprocess');
 
 //Common paths
 var paths = {
@@ -107,6 +108,9 @@ gulp.task('html', function() {
 // Images task — copy all images to public folder and minify
 gulp.task('images', function() {
   // Image files from app/assets
+  gulp.src('client/assets/*.ico')
+  .pipe(gulp.dest('public/assets'));
+  
   return gulp.src(paths.images)
   .pipe(imagemin({
       progressive: true,
@@ -127,13 +131,19 @@ gulp.task('styles', function() {
   .pipe(gulp.dest('public/assets/'));
 });
 
+gulp.task('replace', function() {
+  return gulp.src('./server/**/*.js',{base: './'})
+    .pipe(preprocess())
+    .pipe(gulp.dest('./public/'));
+});
+
 //Generate documentation
 gulp.task('documentation', runCommand('npm install -g yuidocjs \n yuidoc .'));
 
 //Watch tasks
-gulp.task('watch', ['lint'], function() {
+gulp.task('watch', ['lint', 'replace'], function() {
   // When script files change — run lint
-  gulp.watch([paths.scripts],['lint']);
+  gulp.watch([paths.scripts],['lint', 'replace']);
 
 });
 
@@ -156,17 +166,19 @@ gulp.task('open-prod', function(){
 gulp.task('production', function(callback){
   runSequence('clean',
     'lint', 
+    'replace',
     ['js', 'html', 'styles', 'images'],
     callback); 
 });
 
 //Run development environment
-gulp.task('development', ['set-dev-node-env','mongo','nodemon','watch', 'open-dev'],function(){
+gulp.task('development', function(callback){
+  runSequence(
+    'set-dev-node-env',
+    'replace',
+    ['mongo','nodemon','watch', 'open-dev']
+  );
 });
-
-//Preview development code
-gulp.task('pre-prod', ['set-prod-node-env', 'production', 'mongo','nodemon', 'watch', 'open-prod']);
-
 
 //Install dependencies and documentation
 gulp.task('default', ['documentation'],function() {
@@ -203,4 +215,3 @@ gulp.task('back-end-test', function(){
 });
 
 gulp.task('test', ['front-end-test', 'back-end-test']);
-

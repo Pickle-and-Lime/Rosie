@@ -29,8 +29,14 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Auth0 JWT validation
-var client_secret = process.env.AUTH0_CLIENT_SECRET ||
-                    require('../config/config').Auth0ClientSecret;
+/*@if NODE_ENV='production'
+var client_secret = process.env.AUTH0_CLIENT_SECRET;
+/* @endif */
+
+/*@if NODE_ENV='development'
+var client_secret = require('../../config/config').Auth0ClientSecret;
+/* @endif */
+
 var jwtCheck = jwt({
   secret: new Buffer(client_secret, 'base64'),
   audience: 'Vk8WOzc8NcNXTngDQfYqEvGe00jdK92d'
